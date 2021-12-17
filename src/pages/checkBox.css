@@ -1,0 +1,67 @@
+input[id="huey"] {
+    display: none;
+}
+
+.checkbox_img {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("https://s.wemep.co.kr/ui/v2.8.307/dist/pc/css/spr/common.png")
+        0 -438px no-repeat;
+    vertical-align: top;
+}
+
+input[id="huey"]:checked + label span {
+    background-position: -75px -438px;
+}
+
+.checkbox input {
+    display: none;
+}
+
+.checkbox_icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 1px solid red;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox_icon::before,
+.checkbox_icon::after {
+    content: "";
+    display: inline-block;
+    width: 1px;
+    height: 0;
+    background-color: red;
+    position: absolute;
+    transform-origin: left top;
+}
+
+.checkbox_icon::before {
+    top: 9px;
+    left: 2px;
+    transform: rotate(-45deg);
+}
+
+.checkbox_icon::after {
+    top: 16px;
+    left: 9px;
+    transform: rotate(-135deg);
+}
+
+.checkbox input:checked + .checkbox_icon {
+    border-color: red;
+}
+
+.checkbox input:checked + .checkbox_icon::before {
+    height: 10px;
+    transition: all 0.15s ease;
+}
+
+.checkbox input:checked + .checkbox_icon::after {
+    height: 20px;
+    transition: all 0.15s ease 0.15s;
+}

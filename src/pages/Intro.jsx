@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Img from "../img/start.png";
-import { sliderItems } from "../data";
+import { sliderItems } from "../data2";
 
 const Container = styled.div`
     height: 100vh;

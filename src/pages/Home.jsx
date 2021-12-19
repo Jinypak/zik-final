@@ -67,13 +67,25 @@ const GoTestBtn = styled(Link)`
     }
 `;
 
-function Home() {
+function Home({loginCheck, setLoginCheck}) {
     const [state, setstate] = useState();
 
     return (
         <div>
             <Container>
-                <UserInfo>
+                    {loginCheck === false ? <UserInfo>
+                    <KidTabBox><KidTab>
+                        <KidsImage
+                            src="https://avatars.githubusercontent.com/u/79570234?v=4"
+                            alt=""
+                        />
+                        <p>박인호</p>
+                    </KidTab></KidTabBox>
+                    <UserDetail>
+                        <p>Login을 해주세요</p>
+                        <Link to="/login">로그인</Link>
+                    </UserDetail>
+                </UserInfo> : <UserInfo>
                     <KidTabBox><KidTab>
                         <KidsImage
                             src="https://avatars.githubusercontent.com/u/79570234?v=4"
@@ -95,7 +107,6 @@ function Home() {
                         />
                         <p>박인호</p>
                     </KidTab></KidTabBox>
-                    
                     <UserDetail>
                         <p>
                             <h3>이미주님</h3> 안녕하세요!
@@ -104,7 +115,8 @@ function Home() {
                         <p>이미주 님 | 양육자 | 33세 | 거주지 입력</p>
                         <LastTest>최근 검사 후 121일 경과</LastTest>
                     </UserDetail>
-                </UserInfo>
+                </UserInfo>}
+                
                 <HomeInfo>
                     <GoTestBtn to="/test">발달 테스트 하러가기</GoTestBtn>
                 </HomeInfo>

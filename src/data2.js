@@ -81,3 +81,25 @@ export const testDetails = [
         result: "",
     },
 ];
+
+
+export const resultData = [
+    {
+        id: 1,
+        title: "박인호",
+        date: '검사 날짜',
+        link: ''
+    },
+    {
+        id: 1,
+        title: "박인호",
+        date: '검사 날짜',
+        link: ''
+    },
+    {
+        id: 1,
+        title: "박인호",
+        date: '검사 날짜',
+        link: ''
+    },
+]

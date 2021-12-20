@@ -1,4 +1,5 @@
 from typing import List
+from hashlib import sha256
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
@@ -14,7 +15,7 @@ router = APIRouter()
 @router.post('/register', response_model=schema.User)
 async def user_join(join_user: schema.UserCreate, conn: Session = Depends(get_conn)):
     new_user = models.User(**join_user.dict())
-    new_user.password = join_user.password.get_secret_value()
+    new_user.password = sha256(join_user.password.get_secret_value().encode()).hexdigest()
     # @TODOL password 암호화
     conn.add(new_user)
     conn.commit()

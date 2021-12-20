@@ -25,7 +25,7 @@ app.add_middleware(
 @app.on_event("startup")
 def startup():
     pass
-    from database import engine
+    from app.database import engine
     app.mount("/static", StaticFiles(directory="app/static"), name="static")
     models.Base.metadata.create_all(bind=engine)
 

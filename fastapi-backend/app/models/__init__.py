@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String
-from database import Base
+from app.database import Base
 
 
 class User(Base):
@@ -13,6 +13,7 @@ class User(Base):
     mobile = Column(String(12))
     address = Column(String(255))
     detail_address = Column(String(255))
+    zipcode = Column(String(5))
     privacy_ok = Column(Boolean, default=False)
-
-
+    # created_at = Column(DateTime, de)
+    # updated_at = Column(DateTime)

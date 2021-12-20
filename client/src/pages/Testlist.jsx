@@ -19,7 +19,7 @@ function Testlist() {
                 <ResultBox key={result.id}>
                 <h2>{result.title} 검사 결과</h2>
                 <p>{result.date}</p>
-                <Link to='testlist/result/:id'>결과 보기</Link>
+                <Link to='testlist/result/:id' >결과 보기</Link>
             </ResultBox>
             ))}
             

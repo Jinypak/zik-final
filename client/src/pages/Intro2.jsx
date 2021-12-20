@@ -44,6 +44,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
     width: 80vw;
     margin-top: 50px;
+    border: 1px solid ##;
 `;
 
 const InfoContainer = styled.div`

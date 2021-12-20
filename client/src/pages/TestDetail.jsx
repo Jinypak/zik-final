@@ -4,6 +4,7 @@ import styled from "styled-components";
 import "./checkBox.css";
 import { testDetails } from "../data2";
 import { useState } from "react";
+import TestModal from "../components/TestModal";
 
 const Container = styled.div`
     width: 100%;
@@ -63,9 +64,18 @@ const PrevBtn = styled(Link)``;
 const NextBtn = styled(Link)``;
 
 function TestDetail(props) {
+    const [resultCheck, setResultCheck] = useState(false);
+
     let history = useHistory();
+
     const handleClick = (e) => {
-        props.setTestIndex(props.testIndex + e);
+        if (props.testIndex < 4) {
+            props.setTestIndex(props.testIndex + e);
+        }
+        else {
+            setResultCheck(true);
+            props.setTestIndex(0);
+        }
     };
 
     return (
@@ -88,7 +98,14 @@ function TestDetail(props) {
             <TestDetailBox></TestDetailBox>
             <TestLinkBox>
                 <PrevBtn onClick={() => handleClick(-1)}>이전</PrevBtn>
-                <NextBtn onClick={() => handleClick(1)}>다음</NextBtn>
+                {props.testIndex !== 4 ? (
+                    <NextBtn onClick={() => handleClick(1)}>다음 </NextBtn>
+                ) : (
+                    <NextBtn onClick={() => handleClick()}>
+                        결과보기
+                    </NextBtn>
+                )}
+                {resultCheck == true ? <TestModal></TestModal> : null}
             </TestLinkBox>
         </Container>
     );
@@ -97,43 +114,45 @@ function TestDetail(props) {
 function TestDetailBox() {
     return (
         <TestContainer>
-            <TestBox>
-                <TestNumber>{testDetails[3].id}</TestNumber>
-                <TestText>{testDetails[0].desc}</TestText>
-                <TestCheckBox>
-                    <CheckBoxStyling>
-                        <input
-                            class="checkbox_img"
-                            type="radio"
-                            id="huey"
-                            name="drone"
-                            value="huey"
-                            checked
-                        />
-                        <label for="하지 못한다">하지 못한다</label>
-                    </CheckBoxStyling>
+            {testDetails.map((data) => (
+                <TestBox>
+                    <TestNumber>{data.id}</TestNumber>
+                    <TestText>{data.desc}</TestText>
+                    <TestCheckBox>
+                        <CheckBoxStyling>
+                            <input
+                                class="checkbox_img"
+                                type="radio"
+                                id="huey"
+                                name="drone"
+                                value="huey"
+                                checked
+                            />
+                            <label for="하지 못한다">하지 못한다</label>
+                        </CheckBoxStyling>
 
-                    <CheckBoxStyling>
-                        <TestCheck
-                            type="radio"
-                            id="dewey"
-                            name="drone"
-                            value="dewey"
-                        />
-                        <label for="가끔한다">가끔한다</label>
-                    </CheckBoxStyling>
+                        <CheckBoxStyling>
+                            <TestCheck
+                                type="radio"
+                                id="dewey"
+                                name="drone"
+                                value="dewey"
+                            />
+                            <label for="가끔한다">가끔한다</label>
+                        </CheckBoxStyling>
 
-                    <CheckBoxStyling>
-                        <TestCheck
-                            type="radio"
-                            id="louie"
-                            name="drone"
-                            value="louie"
-                        />
-                        <label for="자주 한다">자주 한다</label>
-                    </CheckBoxStyling>
-                </TestCheckBox>
-            </TestBox>
+                        <CheckBoxStyling>
+                            <TestCheck
+                                type="radio"
+                                id="louie"
+                                name="drone"
+                                value="louie"
+                            />
+                            <label for="자주 한다">자주 한다</label>
+                        </CheckBoxStyling>
+                    </TestCheckBox>
+                </TestBox>
+            ))}
         </TestContainer>
     );
 }

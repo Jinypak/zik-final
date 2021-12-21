@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -55,7 +55,13 @@ function App() {
                         />
                     )}
                 /> */}
-                <Route path="/home" component={Home}></Route>
+                <Route
+                    exact
+                    path="/home"
+                    component={Home}
+                    loginCheck={loginCheck}
+                    setLoginCheck={setLoginCheck}
+                ></Route>
                 <Route exact path="/test" component={Test}></Route>
                 <Route exact path="/testlist" component={Testlist}></Route>
                 <Route
@@ -77,8 +83,6 @@ function App() {
                     setLoginCheck={setLoginCheck}
                 ></Route>
                 <Route exact path="/signup" component={SignUp}></Route>
-                {/* <Route path="/testlist" component={Home}></Route>
-                <Route path="/contents" component={Home}></Route> */}
                 <Route exact path="/about" component={About}></Route>
                 <Route path="/about/Profile" component={Profile}></Route>
                 <Route path="/about/KidProfile" component={KidProfile}></Route>

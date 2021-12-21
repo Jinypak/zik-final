@@ -1,149 +1,185 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ReactDOM from "react-dom";
-import { useForm, Controller } from "react-hook-form";
-import { RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 import DaumPostcode from "react-daum-postcode";
 
-// 회원가입 폼
+const Container = styled.div`
+    position: fixed;
+    top: 10;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+    background-color: #fff;
 
-const Container = styled.form`
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    padding: 30px;
-
-    input {
-        border: none;
-        margin: 10px 0px;
-        border-bottom: 1px solid #000;
+    img {
+        width: 100%;
     }
 `;
 
-const StyleSection = styled.section`
+const FormBox = styled.form`
     display: flex;
     flex-direction: column;
 `;
-const StyledLink = styled(Link)`
-    margin: 0 auto;
-    margin-top: 30px;
-    text-decoration: none;
-    padding: 10px 20px;
+
+const FormSection = styled.section`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+
+    .radio-buttons {
+        position: absolute;
+        right: 10%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+    input {
+        border: none;
+        width: 70%;
+        border-bottom: 1px solid #000;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input[name="name"] {
+        width: 50%;
+    }
+    input[name="email"] {
+    }
+    input[name="pwd"] {
+    }
+    input[name="phone"] {
+    }
+    input[name="post"] {
+    }
+
+    .allow {
+    }
+`;
+
+const FormCheckBtn = styled.button`
+    margin: 10px 20% 5px;
+    width: 60%;
+    padding: 5px;
     border-radius: 20px;
-    background-color: #000;
+    background-color: #289CA4;
     color: #fff;
 `;
 
-const defaultValues = {
-    RadioGroup: "",
-    userInput: "",
-};
+const UserLink = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`;
+
+const StyleLink = styled(Link)`
+    padding-bottom: 20px;
+`;
 
 export default function SignUp() {
-    const {
-        handleSubmit,
-        reset,
-        setValue,
-        control,
-        register,
-        watch,
-        formState: { errors },
-    } = useForm({
-        defaultValues,
-    });
-    const [data, setData] = useState(null);
-
     const [post, setPost] = useState(false);
     const postCodeStyle = {
         display: "block",
-        position: "absolute",
-        top: "0px",
-        left: "0px",
-        right: "0px",
+        position: "fixed",
+        top: "0",
+        left: "0",
+        right: "0",
         zIndex: "100",
         height: "100%",
         padding: "0",
     };
 
     return (
-        <Container onSubmit={handleSubmit((data) => setData(data))}>
-            <StyleSection>
-                <label>이메일 입력</label>
-                <Controller
-                    placeholder="user@email.com"
-                    control={control}
-                    name="userInput"
-                    render={({ field }) => <input {...field} />}
-                    {...register("userEmail", {
-                        required: true,
-                        maxLength: 20,
-                        pattern:
-                            /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
-                    })}
-                />
-                {errors?.userEmail?.type === "pattern" && (
-                    <p>유효한 이메일이 아닙니다.</p>
-                )}
-            </StyleSection>
-            <StyleSection>
-                <Controller
-                    render={({ field }) => (
-                        <RadioGroup aria-label="gender" {...field}>
-                            <FormControlLabel
-                                value="남"
-                                control={<Radio />}
-                                label="남"
-                            />
-                            <FormControlLabel
-                                value="여"
-                                control={<Radio />}
-                                label="여"
-                            />
-                        </RadioGroup>
-                    )}
-                    name="RadioGroup"
-                    control={control}
-                />
-            </StyleSection>
-            <StyleSection>
-                <label>비밀번호 입력</label>
-                <Controller
-                    placeholder="password"
-                    control={control}
-                    name="userPwd"
-                    render={({ field }) => <input {...field} />}
-                    {...register("userPwd", { min: 8, max: 99 })}
-                />
-                {errors.userPwd && (
-                    <p>비밀번호는 최소 8자리 이상이어야 합니다.</p>
-                )}
-            </StyleSection>
-            <StyleSection>
-                <label>주소 검색</label>
-                <Controller
-                    placeholder="post"
-                    control={control}
-                    name="post"
-                    render={({ field }) => <input {...field} />}
-                    {...register("post", { min: 8, max: 99 })}
-                />
-                {errors.userPwd && <p>주소 버튼을 클릭해주세요</p>}
-
-                <button onClick={() => setPost(true)}>주소 검색</button>
-                {post === true ? (
-                    <DaumPostcode
-                        onComplete={() => {
-                            setPost(false);
+        <Container>
+            <img src="/img/signImage.png" alt="" />
+            <FormBox>
+                <FormSection>
+                    <label>이름 *</label>
+                    <input type="text" name="name" />
+                    <div class="radio-buttons">
+                        <label>
+                            남<input type="radio" name="optradio" />
+                        </label>
+                        <label>
+                            여<input type="radio" name="optradio" />
+                        </label>
+                    </div>
+                </FormSection>
+                <FormSection>
+                    <label>이메일 *</label>
+                    <input type="text" name="email" />
+                </FormSection>
+                <FormSection>
+                    <label>비밀번호 *</label>
+                    <input type="text" name="pwd" />
+                </FormSection>
+                <FormSection>
+                    <label>휴대폰번호 *</label>
+                    <input type="text" name="phone" />
+                    <button
+                        style={{
+                            position: "absolute",
+                            width: "20%",
+                            top: "10%",
+                            right: "5%",
+                            bottom: "10%",
+                            backgroundColor: "#fff",
+                            border: "1px solid #289CA4",
+                            borderRadius: "30px",
                         }}
-                        style={postCodeStyle}
-                    />
-                ) : (
-                    <></>
-                )}
-            </StyleSection>
-            <StyledLink to="/home">회원가입 하기</StyledLink>
+                    >
+                        인증하기
+                    </button>
+                </FormSection>
+                <FormSection>
+                    <label>주소 *</label>
+                    <input type="text" name="post" />
+                    <button
+                        style={{
+                            position: "absolute",
+                            width: "20%",
+                            top: "10%",
+                            right: "5%",
+                            bottom: "10%",
+                            backgroundColor: "#fff",
+                            border: "1px solid #289CA4",
+                            borderRadius: "30px",
+                        }}
+                        onClick={() => setPost(true)}
+                    >
+                        주소 검색
+                    </button>
+                    {post === true ? (
+                        <DaumPostcode
+                            onComplete={() => {
+                                setPost(false);
+                            }}
+                            style={postCodeStyle}
+                        />
+                    ) : (
+                        <></>
+                    )}
+                </FormSection>
+            </FormBox>
+            <div
+                style={{
+                    width: "95%",
+                    margin: "10px auto",
+                    borderBottom: "1px solid #000",
+                }}
+            ></div>
+            <input type="radio" style={{ marginLeft: "20px" }} /> [필수]
+            개인정보 수집, 이용 동의
+            <FormCheckBtn>회원가입</FormCheckBtn>
+            <UserLink>
+                <p>이미 줌인키즈 계정이 있으신가요?</p>
+                <StyleLink to='/login'>로그인하기</StyleLink>
+            </UserLink>
         </Container>
     );
 }

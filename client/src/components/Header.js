@@ -6,6 +6,7 @@ const Container = styled.div`
     padding-top: 10px;
     padding-bottom: 10px;
     background-color:#ccc;
+    z-index:8;
 `
 
 function Header() {

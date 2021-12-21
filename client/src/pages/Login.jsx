@@ -3,12 +3,25 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../components/LoginModal";
 
+const Container = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+
+    img {
+        width: 100%;
+    }
+`;
+
 const LoginForm = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 40vh;
+    padding: 20px;
     input {
         border: none;
         border-bottom: 1px solid #000;
@@ -51,12 +64,36 @@ const Line = styled.div`
 `;
 const SocialLogin = styled.div`
     display: flex;
-
     padding: 20px;
     button {
-        background-color: #000;
         color: #fff;
-        margin: 0 10px;
+        margin: 0 auto;
+        width: 15vw;
+        height: 15vw;
+    }
+
+    .facebook {
+        background-image: url("./img/facebook.png");
+        border: none;
+        background-color: #fff;
+    }
+
+    .google {
+        background-image: url("./img/google.png");
+        border: none;
+        background-color: #fff;
+    }
+
+    .naver {
+        background-image: url("./img/naver.png");
+        border: none;
+        background-color: #fff;
+    }
+
+    .kakao {
+        background-image: url("./img/kakaotalk.png");
+        border: none;
+        background-color: #fff;
     }
 `;
 
@@ -66,16 +103,17 @@ const StyleLink = styled(Link)`
     margin: 10px;
     border: none;
     border-radius: 30px;
-    background-color: green;
+    background-color: #289CA4;
+`;
+
+const RegiLinkBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 function Login({ loginCheck, setLoginCheck }) {
-
-    useEffect(() => {
-      setLoginCheck(false);
-      console.log(loginCheck);
-    }, [])
-
     const naver = () => {
         window.open("http://localhost:3000/auth/naver", "_self");
     };
@@ -90,11 +128,12 @@ function Login({ loginCheck, setLoginCheck }) {
     };
 
     return (
-        <div>
+        <Container>
             {loginCheck === false ? (
                 <LoginModal></LoginModal>
             ) : (
                 <>
+                    <img src="./img/loginImage.png" alt="" />
                     <LoginForm>
                         <LoginInput type="text" placeholder="user@email.com" />
                         <LoginInput type="text" placeholder="password" />
@@ -104,29 +143,27 @@ function Login({ loginCheck, setLoginCheck }) {
                         >
                             로그인
                         </StyleLink>
-                        <StyleLink to="/signup">회원가입</StyleLink>
                     </LoginForm>
                     <Line>
                         <div className="line"></div>
                         <div className="or">또는</div>
                     </Line>
                     <SocialLogin>
-                        <button className="naver" onClick={naver}>
-                            Login to Naver
-                        </button>
-                        <button className="google" onClick={google}>
-                            Login to Google
-                        </button>
-                        <button className="kakao" onClick={kakao}>
-                            Login to KAKAO
-                        </button>
-                        <button className="facebook" onClick={facebook}>
-                            Login to Facebook
-                        </button>
+                        <button className="naver" onClick={naver}></button>
+                        <button className="google" onClick={google}></button>
+                        <button className="kakao" onClick={kakao}></button>
+                        <button
+                            className="facebook"
+                            onClick={facebook}
+                        ></button>
                     </SocialLogin>
+                    <RegiLinkBox>
+                        <p>줌인키즈 계정이 없으신가요?</p>
+                        <StyleLink to="/signup">회원가입</StyleLink>
+                    </RegiLinkBox>
                 </>
             )}
-        </div>
+        </Container>
     );
 }
 

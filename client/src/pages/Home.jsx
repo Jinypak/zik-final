@@ -68,7 +68,6 @@ const GoTestBtn = styled(Link)`
 `;
 
 function Home({ loginCheck }) {
-    const [state, setstate] = useState();
 
     return (
         <div>

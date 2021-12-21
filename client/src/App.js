@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -13,6 +13,7 @@ import About, {
     Privacy,
     Profile,
     Support,
+    NewsDesc,
 } from "./pages/About";
 import Home from "./pages/Home";
 // import Intro from "./pages/Intro";
@@ -28,7 +29,7 @@ function App() {
     const [start, setStart] = useState(false);
     const [loginCheck, setLoginCheck] = useState(false);
     const [testIndex, setTestIndex] = useState(testDetails[0].id);
-    
+
     return (
         <div className="app">
             {/* <Intro></Intro> */}
@@ -42,7 +43,18 @@ function App() {
             )}
 
             <Switch>
-                {/* <Route path="/" render={()=><Redirect to="home" />} /> */}
+                {/* <Route
+                    exact
+                    path="/"
+                    render={() => (
+                        <Redirect
+                            to={{
+                                pathname: "/login",
+                            }}
+                            component={Login}
+                        />
+                    )}
+                /> */}
                 <Route path="/home" component={Home}></Route>
                 <Route exact path="/test" component={Test}></Route>
                 <Route exact path="/testlist" component={Testlist}></Route>
@@ -61,6 +73,7 @@ function App() {
                     exact
                     path="/login"
                     component={Login}
+                    loginCheck={loginCheck}
                     setLoginCheck={setLoginCheck}
                 ></Route>
                 <Route exact path="/signup" component={SignUp}></Route>
@@ -70,7 +83,12 @@ function App() {
                 <Route path="/about/Profile" component={Profile}></Route>
                 <Route path="/about/KidProfile" component={KidProfile}></Route>
                 <Route path="/about/Alram" component={Alram}></Route>
-                <Route path="/about/News" component={News}></Route>
+                <Route exact path="/about/News" component={News}></Route>
+                <Route
+                    exact
+                    path="/about/News/Newsdesc"
+                    component={NewsDesc}
+                ></Route>
                 <Route path="/about/Support" component={Support}></Route>
                 <Route path="/about/Features" component={Features}></Route>
                 <Route path="/about/Policy" component={Policy}></Route>

@@ -3,11 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
 import { useForm, Controller } from "react-hook-form";
-import {
-    RadioGroup,
-    FormControlLabel,
-    Radio,
-} from "@material-ui/core";
+import { RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
+import DaumPostcode from "react-daum-postcode";
 
 // 회원가입 폼
 
@@ -31,6 +28,7 @@ const StyleSection = styled.section`
 `;
 const StyledLink = styled(Link)`
     margin: 0 auto;
+    margin-top: 30px;
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -57,6 +55,18 @@ export default function SignUp() {
     });
     const [data, setData] = useState(null);
 
+    const [post, setPost] = useState(false);
+    const postCodeStyle = {
+        display: "block",
+        position: "absolute",
+        top: "0px",
+        left: "0px",
+        right: "0px",
+        zIndex: "100",
+        height: "100%",
+        padding: "0",
+    };
+
     return (
         <Container onSubmit={handleSubmit((data) => setData(data))}>
             <StyleSection>
@@ -73,10 +83,6 @@ export default function SignUp() {
                             /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
                     })}
                 />
-                {errors?.userEmail?.type === "required" && (
-                    <p>This field is required</p>
-                )}
-
                 {errors?.userEmail?.type === "pattern" && (
                     <p>유효한 이메일이 아닙니다.</p>
                 )}
@@ -111,9 +117,30 @@ export default function SignUp() {
                     {...register("userPwd", { min: 8, max: 99 })}
                 />
                 {errors.userPwd && (
-                    <p>
-                        비밀번호는 최소 8자리 이상이어야 합니다.
-                    </p>
+                    <p>비밀번호는 최소 8자리 이상이어야 합니다.</p>
+                )}
+            </StyleSection>
+            <StyleSection>
+                <label>주소 검색</label>
+                <Controller
+                    placeholder="post"
+                    control={control}
+                    name="post"
+                    render={({ field }) => <input {...field} />}
+                    {...register("post", { min: 8, max: 99 })}
+                />
+                {errors.userPwd && <p>주소 버튼을 클릭해주세요</p>}
+
+                <button onClick={() => setPost(true)}>주소 검색</button>
+                {post === true ? (
+                    <DaumPostcode
+                        onComplete={() => {
+                            setPost(false);
+                        }}
+                        style={postCodeStyle}
+                    />
+                ) : (
+                    <></>
                 )}
             </StyleSection>
             <StyledLink to="/home">회원가입 하기</StyledLink>

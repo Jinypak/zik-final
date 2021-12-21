@@ -14,12 +14,17 @@ const aboutLinkStyle = {
     paddingTop: "0px",
 };
 
+const AboutTitle = styled.h1`
+    text-align: center;
+`
+
+
 function About() {
     const [tabCheck, setTabCheck] = useState();
 
     return (
         <div className="about">
-            <h1>마이페이지</h1>
+            <AboutTitle>마이페이지</AboutTitle>
             <div className="accountSetting">
                 <h2>계정설정</h2>
                 <Link
@@ -97,7 +102,7 @@ function Profile() {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>프로필 정보 설정</h1>
+            <AboutTitle>프로필 정보 설정</AboutTitle>
         </div>
     );
 }
@@ -146,9 +151,9 @@ const Container = styled.form`
 
     .gender {
         display: flex;
-    flex-direction: row;
+        flex-direction: row;
     }
-    `;
+`;
 
 const StyleSection = styled.section`
     display: flex;
@@ -178,7 +183,7 @@ function KidProfile() {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>우리아이 정보 설정</h1>
+            <AboutTitle>우리아이 정보 설정</AboutTitle>
             <UploadBox>
                 <ImgBtn>
                     <p>+</p>
@@ -202,10 +207,14 @@ function KidProfile() {
                         <p>아이의 이름을 입력해주세요</p>
                     )}
                 </StyleSection>
-                <StyleSection >
+                <StyleSection>
                     <Controller
                         render={({ field }) => (
-                            <RadioGroup className="gender" aria-label="gender" {...field}>
+                            <RadioGroup
+                                className="gender"
+                                aria-label="gender"
+                                {...field}
+                            >
                                 <FormControlLabel
                                     value="남"
                                     control={<Radio />}
@@ -255,7 +264,7 @@ function Alram() {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>알람 설정</h1>
+            <AboutTitle>알람 설정</AboutTitle>
             <div className="alarmBox">
                 <div className="alarmText">
                     <h4>육아정보 알림</h4>
@@ -302,7 +311,7 @@ function News() {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>공지사항</h1>
+            <AboutTitle>공지사항</AboutTitle>
             <NewsBox></NewsBox>
             <NewsBox></NewsBox>
             <NewsBox></NewsBox>
@@ -311,14 +320,41 @@ function News() {
     );
 }
 
+const NewsLink = styled(Link)`
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0 auto;
+    padding-top:20px;
+    padding-bottom:20px;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    text-decoration: none;
+    .title {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+`;
+
 function NewsBox() {
     return (
-        <Link to="/">
-            <h4>제 14차 초대하기 이벤트 당첨자 발표</h4>
-            <p>2021. 06. 10. 13:30</p>
-        </Link>
+        <NewsLink to="/about/News/Newsdesc">
+            <div className="title">
+                <span>제 14차 초대하기 이벤트 당첨자 발표</span><br></br>
+                <span>2021. 06. 10. 13:30</span>
+            </div>
+            <div className="icon">&gt;</div>
+        </NewsLink>
     );
 }
+
+function NewsDesc() {
+    return(<>
+        <AboutTitle>공지사항 제목</AboutTitle>
+        <p>공지사항 내용</p>
+    </>)
+}
+
 
 const SupportBox = styled.div`
     .supTab {
@@ -335,7 +371,7 @@ function Support(props) {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>문의하기</h1>
+            <AboutTitle>문의하기</AboutTitle>
             <SupportBox>
                 <div className="supTab">
                     <button
@@ -385,7 +421,7 @@ function Features() {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>서비스 소개</h1>
+            <AboutTitle>서비스 소개</AboutTitle>
         </div>
     );
 }
@@ -396,7 +432,7 @@ function Policy() {
             <Link to="/about" className="prev">
                 &lt; 이전 페이지로
             </Link>
-            <h1>줌인키즈 서비스 이용약관</h1>
+            <AboutTitle>줌인키즈 서비스 이용약관</AboutTitle>
             <div className="box">
                 <p>
                     제1조(목적) 이 약관은 주식회사 범고래마루(이하 “회사”라
@@ -469,6 +505,6 @@ function Privacy() {
     );
 }
 
-export { Alram, Features, KidProfile, News, Policy, Privacy, Profile, Support };
+export { Alram, Features, KidProfile, News, Policy, Privacy, Profile, Support, NewsDesc };
 
 export default About;

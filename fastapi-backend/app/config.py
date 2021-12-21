@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     DB_SCHEMA: str
 
     JWT_SECRET_KEY: SecretStr
+    TESTING: bool
 
     class Config:
         env_file = ".env"

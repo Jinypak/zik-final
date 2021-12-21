@@ -3,7 +3,7 @@ from hashlib import sha256
 from datetime import timedelta, datetime
 
 from jose import jwt
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from devtools import debug
 
@@ -33,8 +33,12 @@ async def generate_jwt_token(user: schema.User, exp: Optional[timedelta] = None)
     return jwt.encode(original_data, settings.JWT_SECRET_KEY.get_secret_value(), algorithm=HS256)
 
 
-@router.post('/register', response_model=schema.User)
+@router.post('/register', response_model=schema.User, status_code=status.HTTP_201_CREATED)
 async def user_join(join_user: schema.UserCreate, conn: Session = Depends(get_conn)):
+    exist_user = conn.query(models.User).filter_by(email=join_user.email).first()
+    if exist_user:
+        raise HTTPException(status_code=406, detail='Duplicated Email!')
+
     new_user = models.User(**join_user.dict())
     new_user.password = _hash(join_user.password.get_secret_value())
     # @TODOL password 암호화

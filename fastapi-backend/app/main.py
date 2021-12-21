@@ -33,7 +33,7 @@ def startup():
 @app.get("/", status_code=status.HTTP_200_OK)
 def health_check():
     return {
-        "msg": "ok"
+        "healthcheck": "ok"
     }
 
 

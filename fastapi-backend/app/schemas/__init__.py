@@ -1,15 +1,16 @@
+from typing import Optional
 from pydantic import BaseModel, SecretStr
 
 
 class UserBase(BaseModel):
-    email: str
-    is_active: bool
+    email: Optional[str]
+    is_active: Optional[bool]
     username: str
-    mobile: str
-    address: str
-    detail_address: str
-    zipcode: str
-    privacy_ok: bool
+    mobile: Optional[str]
+    address: Optional[str]
+    detail_address: Optional[str]
+    zipcode: Optional[str]
+    privacy_ok: Optional[bool]
 
 
 class UserCreate(UserBase):
@@ -24,5 +25,6 @@ class User(UserBase):
 
 
 class LoginUser(BaseModel):
-    email: str
-    password: SecretStr
+    email: Optional[str]
+    password: Optional[SecretStr]
+    is_social_login: Optional[bool]

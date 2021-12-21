@@ -26,18 +26,17 @@ app.add_middleware(
 def startup():
     pass
     from app.database import engine
+
     app.mount("/static", StaticFiles(directory="app/static"), name="static")
     models.Base.metadata.create_all(bind=engine)
 
 
 @app.get("/", status_code=status.HTTP_200_OK)
 def health_check():
-    return {
-        "healthcheck": "ok"
-    }
+    return {"healthcheck": "ok"}
 
 
 app.include_router(routes.router)
 
-if __name__ == '__main__':
-    uvicorn.run('app.main:app', reload=True)
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", reload=True)

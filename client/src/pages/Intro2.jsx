@@ -44,6 +44,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
     width: 80vw;
     margin-top: 50px;
+    border: 1px solid ##;
 `;
 
 const InfoContainer = styled.div`
@@ -78,7 +79,7 @@ const Slider = (props) => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [intro, setIntro] = useState(false);
     const handleClick = () => {
-        setSlideIndex(slideIndex < 2 ? slideIndex + 1 : props.setStart(true));
+        setSlideIndex(slideIndex < 2 ? slideIndex + 1 : props.setAppIndex(1));
     };
 
     useEffect(() => {

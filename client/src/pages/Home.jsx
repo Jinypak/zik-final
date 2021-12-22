@@ -67,13 +67,9 @@ const GoTestBtn = styled(Link)`
   }
 `;
 
-function Home({ loginCheck }) {
-  const [state, setstate] = useState();
-
+function Home({ loginCheck, appIndex, setAppIndex }) {
   return (
     <div>
-    <LoginModal></LoginModal>
-
       <Container>
         {loginCheck === false ? (
           <UserInfo>
@@ -128,8 +124,13 @@ function Home({ loginCheck }) {
         )}
 
         <HomeInfo>
+          <Link to="/login">
+            로그인
+          </Link>
           <GoTestBtn to="/test">발달 테스트 하러가기</GoTestBtn>
         </HomeInfo>
+
+        {/* <LoginModal></LoginModal> */}
       </Container>
     </div>
   );

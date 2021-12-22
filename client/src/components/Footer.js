@@ -11,6 +11,7 @@ const Container = styled.div`
     display: flex;
     align-items: space-evenly;
     justify-content: center;
+    z-index:8;
 `;
 
 const Menu = styled(Link)`

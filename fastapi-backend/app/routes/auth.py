@@ -76,11 +76,6 @@ async def user_join(join_user: schema.UserCreate, conn: Session = Depends(get_co
     return new_user
 
 
-@router.get("/users", response_model=List[schema.User])
-async def get_users(conn: Session = Depends(get_conn)):
-    return conn.query(models.User).all()
-
-
 @router.post("/login")
 async def login(login: schema.LoginUser, conn: Session = Depends(get_conn)) -> str:
     pwd_hash = _hash(login.password.get_secret_value())
@@ -97,3 +92,10 @@ async def login(login: schema.LoginUser, conn: Session = Depends(get_conn)) -> s
 @router.get("/validation/jwt", response_model=schema.IDResponse)
 async def validation_token(user: dict = Depends(check_jwt_token)):
     return user
+
+
+@router.get(
+    "/users", response_model=List[schema.User], dependencies=[Depends(validation_token)]
+)
+async def get_users(conn: Session = Depends(get_conn)):
+    return conn.query(models.User).all()

@@ -2,6 +2,13 @@ from typing import Optional
 from pydantic import BaseModel, SecretStr
 
 
+class IDResponse(BaseModel):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
 class UserBase(BaseModel):
     email: Optional[str]
     is_active: Optional[bool]
@@ -27,4 +34,4 @@ class User(UserBase):
 class LoginUser(BaseModel):
     email: Optional[str]
     password: Optional[SecretStr]
-    is_social_login: Optional[bool]
+    # is_social_login: Optional[bool]

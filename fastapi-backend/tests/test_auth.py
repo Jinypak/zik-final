@@ -5,6 +5,8 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 
+# from app.routes.auth import generate_jwt_token
+
 client = TestClient(app)
 
 
@@ -61,3 +63,16 @@ def test_error_join_user():
     response = client.post("/auth/register", json=param)
     assert response.status_code == 406
     assert response.json() == {"detail": "Duplicated Email!"}
+
+
+def test_validation_jwt_token():
+    """validation jwt token"""
+    # fake_token
+    response = client.post("/auth/login", json={"email": "a@a.com", "password": 12345})
+    assert "token" in response.json()
+    token = response.json().get("token")
+    response = client.get(
+        "/auth/validation/jwt", headers={"Authorization": "Bearer " + token}
+    )
+    assert response.status_code == 200
+    assert "id" in response.json()

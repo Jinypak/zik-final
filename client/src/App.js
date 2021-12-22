@@ -14,6 +14,7 @@ import About, {
     Profile,
     Support,
     NewsDesc,
+    WriteSupport,
 } from "./pages/About";
 import Home from "./pages/Home";
 // import Intro from "./pages/Intro";
@@ -106,7 +107,10 @@ function App() {
                     path="/about/News/Newsdesc"
                     component={NewsDesc}
                 ></Route>
-                <Route path="/about/Support" component={Support}></Route>
+                <Route exact path="/about/Support" component={Support}></Route>
+                <Route exact path="/about/Support/:id">
+                    <WriteSupport />
+                </Route>
                 <Route path="/about/Features" component={Features}></Route>
                 <Route path="/about/Policy" component={Policy}></Route>
                 <Route path="/about/Privacy" component={Privacy}></Route>

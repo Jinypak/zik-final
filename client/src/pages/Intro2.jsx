@@ -102,7 +102,7 @@ const Slider = (props) => {
                                 <Desc>{item.desc}</Desc>
                             </InfoContainer>
                             <IntroBtn onClick={() => handleClick()}>
-                                {item.button}
+                                {item.button}{props.appIndex}
                             </IntroBtn>
                         </Slide>
                     ))}

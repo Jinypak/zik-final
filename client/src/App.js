@@ -47,7 +47,7 @@ function App() {
             {appIndex === 2 ? <Login /> : null}
 
             <Switch>
-                <Route
+                {/* <Route
                     exact
                     path="/"
                     render={() => (
@@ -58,7 +58,7 @@ function App() {
                             component={Home}
                         />
                     )}
-                />
+                /> */}
                 <Route
                     exact
                     path="/home"

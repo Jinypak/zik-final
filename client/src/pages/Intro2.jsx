@@ -4,60 +4,61 @@ import { sliderItems } from "../data2";
 import { mobile } from "../responsive";
 
 const Container = styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    position: relative;
-    overflow: hidden;
-    ${mobile({ display: "none" })}
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  overflow: hidden;
+  ${mobile({ display: "none" })}
 `;
 
 const StartImg = styled.img`
-    height: 100%;
-    margin: 0 auto;
-    transition: all 0.3s ease;
+  height: 100%;
+  margin: 0 auto;
+  transition: all 0.3s ease;
 `;
 
 const Wrapper = styled.div`
-    height: 100%;
-    display: flex;
-    transition: all 1.5s ease;
-    transform: translateX(${(props) => props.slideIndex * -100}vw);
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  transition: all 1.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
-    width: 100vw;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    justify-content: center;
-    background-color: #${(props) => props.bg};
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  justify-content: center;
+  background-color: #${(props) => props.bg};
 `;
 
 const ImgContainer = styled.div`
-    height: 100%;
-    flex: 1;
+  height: 100%;
+  flex: 1;
 `;
 
 const Image = styled.img`
-    width: 80vw;
-    margin-top: 50px;
-    border: 1px solid ##;
+  width: 80vw;
+  margin-top: 50px;
 `;
 
 const InfoContainer = styled.div`
-    flex: 1;
-    padding: 50px;
+  flex: 1;
+  padding: 50px;
 `;
 
 const Desc = styled.p`
-    margin: 0 auto;
-    font-size: 20px;
-    font-weight: bold;
-    letter-spacing: -0.5px;
-    text-align: center;
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  text-align: center;
 `;
 
 // const InfoNav = styled.div`
@@ -70,46 +71,52 @@ const Desc = styled.p`
 // `;
 
 const IntroBtn = styled.button`
-    width: 80%;
-    padding: 10px 1px;
-    border-radius: 9999px;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  border-radius: 9999px;
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
 `;
 
 const Slider = (props) => {
-    const [slideIndex, setSlideIndex] = useState(0);
-    const [intro, setIntro] = useState(false);
-    const handleClick = () => {
-        setSlideIndex(slideIndex < 2 ? slideIndex + 1 : props.setAppIndex(1));
-    };
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [intro, setIntro] = useState(false);
+  const handleClick = () => {
+    setSlideIndex(slideIndex < 2 ? slideIndex + 1 : props.setAppIndex(1));
+  };
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIntro(true);
-        }, 2000);
-    }, []);
-    return (
-        <Container>
-            {intro === false ? (
-                <StartImg src="./img/start.png" alt=""></StartImg>
-            ) : (
-                <Wrapper slideIndex={slideIndex}>
-                    {sliderItems.map((item) => (
-                        <Slide key={item.id}>
-                            <ImgContainer>
-                                <Image src={item.img} />
-                            </ImgContainer>
-                            <InfoContainer>
-                                <Desc>{item.desc}</Desc>
-                            </InfoContainer>
-                            <IntroBtn onClick={() => handleClick()}>
-                                {item.button}{props.appIndex}
-                            </IntroBtn>
-                        </Slide>
-                    ))}
-                </Wrapper>
-            )}
-        </Container>
-    );
+  useEffect(() => {
+    setTimeout(() => {
+      setIntro(true);
+    }, 2000);
+  }, []);
+  return (
+    <Container>
+      {intro === false ? (
+        <StartImg src="./img/start.png" alt=""></StartImg>
+      ) : (
+        <>
+          <Wrapper slideIndex={slideIndex}>
+            {sliderItems.map((item) => (
+              <Slide key={item.id}>
+                <ImgContainer>
+                  <Image src={item.img} />
+                </ImgContainer>
+                <InfoContainer>
+                  <Desc>{item.desc}</Desc>
+                </InfoContainer>
+              </Slide>
+            ))}
+          </Wrapper>
+          <IntroBtn onClick={() => handleClick()}>
+            {slideIndex < 2 ? <p>다음</p> : <p>시작하기</p>}
+          </IntroBtn>
+        </>
+      )}
+    </Container>
+  );
 };
 
 export default Slider;

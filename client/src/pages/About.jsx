@@ -430,8 +430,41 @@ const BtnBox = styled.div`
     width: 80%;
 `;
 
+const WriteSucModal = styled.div`
+    background-color: rgba(255, 255, 255, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    p {
+        position: fixed;
+        top: 30%;
+        left: 5%;
+        right: 5%;
+        bottom: 30%;
+        background-color: #fff;
+        color: #289ca4;
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
+`;
+
 function WriteSupport() {
+    const [writeBtnClick, setWriteBtnClick] = useState(false);
     let history = useHistory();
+
+    const WriteBtnEvent = () => {
+        setWriteBtnClick(true);
+        console.log(writeBtnClick);
+        // useEffect(() => {
+        //     setTimeout(() => {
+        //         history.goBack();
+        //     }, 3000);
+        // });
+    };
 
     return (
         <WriteForm>
@@ -445,8 +478,13 @@ function WriteSupport() {
             </div>
             <BtnBox>
                 <button onClick={() => history.goBack()}>취소</button>
-                <button>작성하기</button>
+                <button onClick={() => WriteBtnEvent()}>작성하기</button>
             </BtnBox>
+            {writeBtnClick === true ? (
+                <WriteSucModal>
+                    <p>작성이 완료되었습니다.</p>
+                </WriteSucModal>
+            ) : null}
         </WriteForm>
     );
 }

@@ -7,11 +7,14 @@ const Container = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #ccc;
+    height: 10vh;
+    background-color: #fff;
     display: flex;
     align-items: space-evenly;
     justify-content: center;
     z-index:8;
+    border-top: 1px solid #ccc;
+    padding: 0 10px;
 `;
 
 const Menu = styled(Link)`
@@ -24,7 +27,7 @@ const Menu = styled(Link)`
 `;
 const MenuImg = styled.img``;
 const MenuTitle = styled.div`
-    color: #fff;
+color: #000;
 `;
 
 function Footer() {

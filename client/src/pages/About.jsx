@@ -5,6 +5,11 @@ import "./About.css";
 import { useForm, Controller } from "react-hook-form";
 import { RadioGroup, FormControlLabel, Radio } from "@material-ui/core";
 
+const AboutContainer = styled.div`
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+`;
+
 const aboutLinkStyle = {
   display: "flex",
   justifyContent: "space-between",
@@ -22,7 +27,7 @@ const AboutTitle = styled.h1`
 
 function About() {
   return (
-    <div className="about">
+    <AboutContainer className="about">
       <AboutTitle>마이페이지</AboutTitle>
       <div className="accountSetting">
         <h2>계정설정</h2>
@@ -66,7 +71,7 @@ function About() {
           <p>&gt;</p>
         </Link>
       </div>
-    </div>
+    </AboutContainer>
   );
 }
 function Profile() {

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginModal from "../components/LoginModal";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
 
 const Container = styled.div`
   width: 100%;
@@ -11,7 +15,9 @@ const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
 `;
 
-const UserInfo = styled.div``;
+const UserInfo = styled.div`
+  background-color: rgba(0, 0, 0, 0.2);
+`;
 const KidsImage = styled.img`
   width: 80%;
   border-radius: 9999px;
@@ -72,7 +78,7 @@ const HomeInfoTab = styled.div`
   }
 
   li.active {
-    border: 1px solid #000;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     height: 100%;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 1);
@@ -90,6 +96,12 @@ const HomeInfoBox = styled.div`
   img {
     width: 80%;
     margin: 0 auto;
+  }
+  h3 {
+    padding: 5px 20px;
+  }
+  p {
+    padding: 5px 20px;
   }
 `;
 
@@ -109,7 +121,29 @@ const GoTestBtn = styled(Link)`
   }
 `;
 
+const SliderBox = styled.div`
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+  flex-direction: column;
 
+  background-color: #fff;
+  border-radius: 30px;
+  img {
+    width: 100%;
+  }
+  p {
+    text-align: center;
+    padding: 30px;
+    background-color: #289ca4;
+    margin: 0;
+    margin-top: 20px;
+    color: #fff;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+`;
 
 function Home({ appIndex, setAppIndex, loginCheck }) {
   return (
@@ -178,6 +212,30 @@ function Home({ appIndex, setAppIndex, loginCheck }) {
                 </UserInfo>
 
                 <HomeInfo>
+                  <Swiper
+                    spaceBetween={10}
+                    slidesPerView={"auto"}
+                    onSwiper={(swiper) => console.log(swiper)}
+                  >
+                    <SwiperSlide>
+                      <SliderBox>
+                        <img src="./img/arrow01.png" alt="" />
+                        <p>첫번째, 발달영역이란?</p>
+                      </SliderBox>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <SliderBox>
+                        <img src="./img/arrow02.png" alt="" />
+                        <p>두번째, 우리아이 발달수준 알아보기</p>
+                      </SliderBox>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <SliderBox>
+                        <img src="./img/arrow03.png" alt="" />
+                        <p>세번째, 우리아이 방향 정하기</p>
+                      </SliderBox>
+                    </SwiperSlide>
+                  </Swiper>
                   <HomeInfoTab>
                     <li className="active">인지</li>
                     <li>사회성</li>

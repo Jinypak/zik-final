@@ -6,8 +6,10 @@ const Container = styled.div`
     left: 0;
     right: 0;
     height: 10vh;
-    line-height: 10vh;
+    display: flex;
+    align-items: center;
     width: 100%;
+    justify-content: center;
     text-align: center;
     background-color:#ccc;
     z-index:8;

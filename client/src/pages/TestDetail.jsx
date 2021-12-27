@@ -18,26 +18,43 @@ const PrevLink = styled(Link)`
   padding-top: 10px;
   text-decoration: none;
   color: #ccc;
-  border-bottom: 1px solid #ccc;
+  text-decoration: none;
 `;
 
 const TestTab = styled.div`
   display: flex;
   justify-content: center;
+  margin: 10px auto 20px;
 
   p {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 5px 10px;
     margin: 5px 5px;
-    margin-top: 20px;
   }
 `;
 
 const TestContainer = styled.div``;
-const TestBox = styled.div``;
-const TestNumber = styled.div``;
-const TestText = styled.div``;
+const TestBox = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  .flexContainer {
+    display: flex;
+    justify-content: space-around;
+  }
+`;
+const TestNumber = styled.div`
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 9999px;
+`;
+const TestText = styled.div`
+  width: 80%;
+`;
 const TestCheckBox = styled.label`
   display: flex;
   align-items: center;
@@ -48,6 +65,34 @@ const CheckBoxStyling = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 20px 0;
+  span {
+    width: 50px;
+    height: 50px;
+    border-radius: 9999px;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    opacity: 0.5;
+  }
+
+  .low {
+    background-color: #7acbcf;
+  }
+  .middle {
+    background-color: #fdb03f;
+  }
+  .high {
+    background-color: #fd7765;
+  }
+
+  .active {
+    opacity: 1;
+  }
+
+  label {
+    margin-top: 10px;
+  }
 `;
 
 const TestCheck = styled.input`
@@ -69,6 +114,7 @@ const PrevBtn = styled(Link)`
   text-decoration: none;
   line-height: 50px;
   border: 1px solid #289ca4;
+  margin-bottom: 5vh;
 `;
 const NextBtn = styled(Link)`
   width: 40%;
@@ -79,6 +125,25 @@ const NextBtn = styled(Link)`
   border-radius: 30px;
   text-decoration: none;
   line-height: 50px;
+  margin-bottom: 5vh;
+`;
+
+const TestTitle = styled.h2`
+  margin: 0 auto;
+  padding: 0;
+  width: 90%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  p {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: #289ca4;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+  }
 `;
 
 function TestDetail(props) {
@@ -97,12 +162,10 @@ function TestDetail(props) {
 
   return (
     <Container>
-      <PrevLink onClick={() => history.goBack()}>&lt;이전 페이지로</PrevLink>
-      <label class="checkbox">
-        <input type="checkbox" />
-        <span class="checkbox_icon"></span>
-        <span class="checkbox_text"></span>
-      </label>
+      <PrevLink onClick={() => history.goBack()}>&lt; 이전 페이지로</PrevLink>
+      <TestTitle>
+        발달 검사 <p>?</p>
+      </TestTitle>
       <TestTab>
         <p>인지</p>
         <p>사회성</p>
@@ -118,7 +181,7 @@ function TestDetail(props) {
         ) : (
           <NextBtn onClick={() => handleClick()}>결과보기</NextBtn>
         )}
-        {resultCheck == true ? <TestModal></TestModal> : null}
+        {resultCheck === true ? <TestModal></TestModal> : null}
       </TestLinkBox>
     </Container>
   );
@@ -129,28 +192,23 @@ function TestDetailBox() {
     <TestContainer>
       {testDetails.map((data) => (
         <TestBox>
-          <TestNumber>{data.id}</TestNumber>
-          <TestText>{data.desc}</TestText>
+          <div className="flexContainer">
+            <TestNumber>{data.id}</TestNumber>
+            <TestText>{data.desc}</TestText>
+          </div>
           <TestCheckBox>
             <CheckBoxStyling>
-              <input
-                class="checkbox_img"
-                type="radio"
-                id="huey"
-                name="drone"
-                value="huey"
-                checked
-              />
+              <span class="low">하</span>
               <label for="하지 못한다">하지 못한다</label>
             </CheckBoxStyling>
 
             <CheckBoxStyling>
-              <TestCheck type="radio" id="dewey" name="drone" value="dewey" />
+              <span class="middle  active">중</span>
               <label for="가끔한다">가끔한다</label>
             </CheckBoxStyling>
 
             <CheckBoxStyling>
-              <TestCheck type="radio" id="louie" name="drone" value="louie" />
+              <span class="high">상</span>
               <label for="자주 한다">자주 한다</label>
             </CheckBoxStyling>
           </TestCheckBox>

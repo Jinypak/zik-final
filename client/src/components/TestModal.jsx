@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -15,8 +15,8 @@ const ModalBox = styled.div`
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 5%;
+    right: 5%;
     height: 80%;
     padding: 20px;
     display: flex;
@@ -24,8 +24,7 @@ const ModalBox = styled.div`
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    border-radius: 30px;
     transform: translateY(${(props) => props.transY}%);
     background-color: #fff;
     transition: 2s ease;
@@ -36,13 +35,13 @@ function TestModal() {
     let history = useHistory();
     //   const [transY, setTransY] = useState(100);
     useEffect(() => {
-        setTransY(0);
+        setTransY(10);
     }, []);
     useEffect(() => {
         setTimeout(() => {
             history.push("/testlist");
         }, 5000);
-    }, []);
+    }, [history]);
     return ( 
         <Container>
             <ModalBox transY={transY} setTransY={setTransY}>

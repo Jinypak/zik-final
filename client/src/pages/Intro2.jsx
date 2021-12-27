@@ -50,7 +50,7 @@ const Image = styled.img`
 
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 50px;
+  padding: 20px 40px;
 `;
 
 const Desc = styled.p`

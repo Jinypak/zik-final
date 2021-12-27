@@ -25,6 +25,17 @@ const AboutTitle = styled.h1`
   font-size: 24px;
 `;
 
+const AboutInnerContainer = styled.div`
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+
+  .prev {
+    text-decoration: none;
+    padding: 20px;
+    color: #ccc;
+  }
+`;
+
 function About() {
   return (
     <AboutContainer className="about">
@@ -76,12 +87,12 @@ function About() {
 }
 function Profile() {
   return (
-    <div className="aboutLayout profile">
+    <AboutInnerContainer className="aboutLayout profile">
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
       <AboutTitle>프로필 정보 설정</AboutTitle>
-    </div>
+    </AboutInnerContainer>
   );
 }
 
@@ -157,7 +168,7 @@ function KidProfile() {
   });
   const [data, setData] = useState(null);
   return (
-    <div>
+    <AboutInnerContainer>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -175,6 +186,8 @@ function KidProfile() {
             placeholder="kids name"
             control={control}
             name="kidsname"
+            className="styledController"
+            style={{ backgroundColor: "red" }}
             render={({ field }) => <input {...field} />}
             {...register("kidsname", {
               required: true,
@@ -220,13 +233,13 @@ function KidProfile() {
           {errors.userPwd && <p>생년월일</p>}
         </StyleSection>
       </Container>
-    </div>
+    </AboutInnerContainer>
   );
 }
 
 function Alram() {
   return (
-    <div>
+    <AboutInnerContainer>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -267,13 +280,13 @@ function Alram() {
           </div>
         </section>
       </div>
-    </div>
+    </AboutInnerContainer>
   );
 }
 
 function News() {
   return (
-    <div>
+    <AboutInnerContainer>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -282,7 +295,7 @@ function News() {
       <NewsBox></NewsBox>
       <NewsBox></NewsBox>
       <NewsBox></NewsBox>
-    </div>
+    </AboutInnerContainer>
   );
 }
 
@@ -352,7 +365,7 @@ function Support() {
   let history = useHistory();
 
   return (
-    <div style={{ position: "relative", height: "80vh" }}>
+    <AboutInnerContainer style={{ position: "relative", height: "80vh" }}>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -378,7 +391,7 @@ function Support() {
         onClick={() => history.push("/about/Support/:id")}
         alt=""
       />
-    </div>
+    </AboutInnerContainer>
   );
 }
 
@@ -387,6 +400,7 @@ const WriteForm = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 10vh 0px;
 
   .title {
     padding: 20px;
@@ -477,35 +491,37 @@ function WriteSupport() {
   };
 
   return (
-    <WriteForm>
-      <div className="title">
-        <label>제목</label>
-        <input type="text" />
-      </div>
-      <div className="desc">
-        <label>문의 내용</label>
-        <input type="text" />
-      </div>
-      <div className="email">
-        <label>답변 받으실 메일 주소</label>
-        <input type="text" />
-      </div>
-      <BtnBox>
-        <button onClick={() => history.goBack()}>취소</button>
-        <button onClick={() => WriteBtnEvent()}>작성하기</button>
-      </BtnBox>
-      {writeBtnClick === true ? (
-        <WriteSucModal>
-          <p>작성이 완료되었습니다.</p>
-        </WriteSucModal>
-      ) : null}
-    </WriteForm>
+    <AboutInnerContainer>
+      <WriteForm>
+        <div className="title">
+          <label>제목</label>
+          <input type="text" />
+        </div>
+        <div className="desc">
+          <label>문의 내용</label>
+          <input type="text" />
+        </div>
+        <div className="email">
+          <label>답변 받으실 메일 주소</label>
+          <input type="text" />
+        </div>
+        <BtnBox>
+          <button onClick={() => history.goBack()}>취소</button>
+          <button onClick={() => WriteBtnEvent()}>작성하기</button>
+        </BtnBox>
+        {writeBtnClick === true ? (
+          <WriteSucModal>
+            <p>작성이 완료되었습니다.</p>
+          </WriteSucModal>
+        ) : null}
+      </WriteForm>
+    </AboutInnerContainer>
   );
 }
 
 function Features() {
   return (
-    <div>
+    <AboutInnerContainer>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -527,13 +543,13 @@ function Features() {
           “플랫폼”이 제공하는 서비스를 이용하는 자를 말합니다.
         </p>
       </div>
-    </div>
+    </AboutInnerContainer>
   );
 }
 
 function Policy() {
   return (
-    <div>
+    <AboutInnerContainer>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -555,13 +571,13 @@ function Policy() {
           “플랫폼”이 제공하는 서비스를 이용하는 자를 말합니다.
         </p>
       </div>
-    </div>
+    </AboutInnerContainer>
   );
 }
 
 function Privacy() {
   return (
-    <div>
+    <AboutInnerContainer>
       <Link to="/about" className="prev">
         &lt; 이전 페이지로
       </Link>
@@ -595,7 +611,7 @@ function Privacy() {
           <li>- 개인정보처리방침 변경 </li>
         </ul>
       </div>
-    </div>
+    </AboutInnerContainer>
   );
 }
 

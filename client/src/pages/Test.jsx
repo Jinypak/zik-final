@@ -15,8 +15,10 @@ const Container = styled.div`
 const TestInfoA = styled.div`
   width: 95%;
   margin: 20px auto;
-  border: 1px solid #000;
   border-radius: 20px;
+  img {
+    width: 100%;
+  }
 `;
 // const InfoAText = styled.div`
 //     padding: 10px;
@@ -24,8 +26,10 @@ const TestInfoA = styled.div`
 const TestInfoB = styled.div`
   width: 95%;
   margin: 20px auto;
-  border: 1px solid #000;
   border-radius: 20px;
+  img {
+    width: 100%;
+  }
 `;
 // const InfoBText = styled.div``;
 const TestBtn = styled(Link)`
